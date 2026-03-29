@@ -8,21 +8,23 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  nom       String
-  prenom    String
-  email     String   @unique
-  telephone String   @unique
-  password  String
-  role      String   @default("acheteur")
-  ville     String?
-  verifie   Boolean  @default(false)
-  createdAt DateTime @default(now())
-  annonces  Annonce[]
+  id               String    @id @default(cuid())
+  nom              String
+  prenom           String
+  email            String    @unique
+  telephone        String    @unique
+  password         String
+  role             String    @default("acheteur")
+  ville            String?
+  verifie          Boolean   @default(false)
+  createdAt        DateTime  @default(now())
+  annonces         Annonce[]
+  messagesEnvoyes  Message[] @relation("MessagesEnvoyes")
+  messagesRecus    Message[] @relation("MessagesRecus")
 }
 
 model Annonce {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   marque      String
   modele      String
   annee       Int
@@ -33,10 +35,25 @@ model Annonce {
   prix        Int
   ville       String
   description String
-  statut      String   @default("en_attente")
-  dedouane    Boolean  @default(false)
-  photos      String   @default("[]")
-  createdAt   DateTime @default(now())
+  statut      String    @default("en_attente")
+  dedouane    Boolean   @default(false)
+  photos      String    @default("[]")
+  createdAt   DateTime  @default(now())
   vendeurId   String
-  vendeur     User     @relation(fields: [vendeurId], references: [id])
+  vendeur     User      @relation(fields: [vendeurId], references: [id])
+  messages    Message[]
 }
+
+model Message {
+  id             String   @id @default(cuid())
+  contenu        String
+  lu             Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  envoyeurId     String
+  destinataireId String
+  annonceId      String?
+  envoyeur       User     @relation("MessagesEnvoyes", fields: [envoyeurId], references: [id])
+  destinataire   User     @relation("MessagesRecus", fields: [destinataireId], references: [id])
+  annonce        Annonce? @relation(fields: [annonceId], references: [id])
+}
+ 

@@ -15,6 +15,7 @@ export async function GET(
       include: {
         vendeur: {
           select: {
+            id: true,
             nom: true,
             prenom: true,
             telephone: true,

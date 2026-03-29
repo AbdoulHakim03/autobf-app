@@ -19,6 +19,7 @@ type Annonce = {
   photos: string
   createdAt: string
   vendeur: {
+    id: string
     nom: string
     prenom: string
     telephone: string
@@ -65,7 +66,6 @@ export default function Detail() {
 
   return (
     <main className="min-h-screen bg-[#F5F0E8]">
- 
 
       <div className="pt-24 px-[5%] pb-20 grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
 
@@ -153,9 +153,9 @@ export default function Detail() {
                 <a href={lienPaiement} className="block w-full py-4 rounded-xl bg-[#C17B2E] text-white font-bold text-center hover:bg-[#A86520] transition-all shadow-lg">
                   🔒 Acheter via Escrow
                 </a>
-                <button className="w-full py-3 rounded-xl border border-black/10 text-[#3D3020] font-semibold text-sm hover:border-[#C17B2E] hover:text-[#C17B2E] transition-all">
+                <a href={`/messages?avecUserId=${annonce.vendeur.id}`} className="block w-full py-3 rounded-xl border border-black/10 text-[#3D3020] font-semibold text-sm hover:border-[#C17B2E] hover:text-[#C17B2E] transition-all text-center">
                   💬 Contacter le vendeur
-                </button>
+                </a>
                 <button className="w-full py-3 rounded-xl bg-[#2A7A4B]/10 text-[#2A7A4B] font-semibold text-sm border border-[#2A7A4B]/25 hover:bg-[#2A7A4B]/20 transition-all">
                   📅 Planifier une visite
                 </button>
