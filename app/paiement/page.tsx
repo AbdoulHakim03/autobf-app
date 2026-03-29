@@ -49,18 +49,14 @@ function PaiementContent() {
   return (
     <main className="min-h-screen bg-[#F5F0E8] flex items-center justify-center px-4 py-20">
 
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[5%] h-[66px] bg-[#F5F0E8]/90 backdrop-blur-md border-b border-black/10">
-        <a href="/" className="font-bold text-xl text-[#1A1208]">
-          Auto<span className="text-[#C17B2E]">BF</span>
-        </a>
-      </nav>
+ 
 
       <div className="w-full max-w-md">
 
         <div className="text-center mb-8">
           <div className="text-4xl mb-3">🔒</div>
           <h1 className="text-2xl font-bold text-[#1A1208] mb-2">Paiement sécurisé</h1>
-          <p className="text-sm text-[#8A7A65]">Ton argent est protégé jusqu'à réception du véhicule</p>
+          <p className="text-sm text-[#8A7A65]">Votre argent est protégé jusqu'à réception du véhicule</p>
         </div>
 
         <div className="bg-white rounded-2xl border border-black/10 shadow-md p-6 mb-4">

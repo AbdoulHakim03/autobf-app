@@ -104,14 +104,7 @@ export default function Publier() {
 
   return (
     <main className="min-h-screen bg-[#F5F0E8] pb-20">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[5%] h-[66px] bg-[#F5F0E8]/90 backdrop-blur-md border-b border-black/10">
-        <a href="/" className="font-bold text-xl text-[#1A1208]">
-          Auto<span className="text-[#C17B2E]">BF</span>
-        </a>
-        <a href="/dashboard" className="px-5 py-2 rounded-lg border border-black/10 text-sm font-medium text-[#3D3020] hover:border-[#C17B2E] hover:text-[#C17B2E] transition-all">
-          Mon compte
-        </a>
-      </nav>
+      
 
       <div className="pt-24 px-[5%] max-w-3xl mx-auto">
         <div className="mb-8">

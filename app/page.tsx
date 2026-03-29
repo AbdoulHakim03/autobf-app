@@ -2,26 +2,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#F5F0E8]">
 
-      {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[5%] h-[66px] bg-[#F5F0E8]/90 backdrop-blur-md border-b border-black/10">
-        <a href="/" className="font-bold text-xl text-[#1A1208]">
-          Auto<span className="text-[#C17B2E]">BF</span>
-        </a>
-        <div className="hidden md:flex items-center gap-6">
-          <a href="/search" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Acheter</a>
-          <a href="/publier" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Vendre</a>
-          <a href="/dashboard" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Mon compte</a>
-        </div>
-        <div className="flex items-center gap-3">
-          <a href="/login" className="px-5 py-2 rounded-lg border border-black/10 text-sm font-medium text-[#3D3020] hover:border-[#C17B2E] hover:text-[#C17B2E] transition-all">
-            Connexion
-          </a>
-          <a href="/publier" className="px-5 py-2 rounded-lg bg-[#C17B2E] text-white text-sm font-semibold hover:bg-[#A86520] transition-all shadow-md">
-            Publier une annonce
-          </a>
-        </div>
-      </nav>
-
       {/* HERO */}
       <section className="pt-40 pb-20 px-[5%]">
         <div className="max-w-2xl">
@@ -137,7 +117,6 @@ export default function Home() {
             <a href="/search" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Acheter</a>
             <a href="/publier" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Vendre</a>
             <a href="/dashboard" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Mon compte</a>
-            <a href="/login" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Connexion</a>
           </div>
           <p className="text-[#8A7A65] text-sm">© 2026 AutoBF — OUEDRAOGO Abdoul Hakim</p>
         </div>
@@ -145,4 +124,4 @@ export default function Home() {
 
     </main>
   )
-}
+} 

@@ -49,19 +49,7 @@ export default function Inscription() {
 
   return (
     <main className="min-h-screen bg-[#F5F0E8] flex items-center justify-center px-4 py-20">
-
-      {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[5%] h-[66px] bg-[#F5F0E8]/90 backdrop-blur-md border-b border-black/10">
-        <a href="/" className="font-bold text-xl text-[#1A1208]">
-          Auto<span className="text-[#C17B2E]">BF</span>
-        </a>
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-[#8A7A65]">Déjà un compte ?</span>
-          <a href="/login" className="px-5 py-2 rounded-lg bg-[#C17B2E] text-white text-sm font-semibold">
-             Connexion
-          </a>
-        </div>
-      </nav>
+ 
 
       <div className="w-full max-w-md">
 

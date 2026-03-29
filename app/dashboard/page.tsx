@@ -59,17 +59,7 @@ export default function Dashboard() {
 
   return (
     <main className="min-h-screen bg-[#F5F0E8]">
-
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[5%] h-[66px] bg-[#F5F0E8]/90 backdrop-blur-md border-b border-black/10">
-        <a href="/" className="font-bold text-xl text-[#1A1208]">
-          Auto<span className="text-[#C17B2E]">BF</span>
-        </a>
-        <div className="flex items-center gap-3">
-          <a href="/publier" className="px-5 py-2 rounded-lg bg-[#C17B2E] text-white text-sm font-semibold">
-            + Publier une annonce
-          </a>
-        </div>
-      </nav>
+ 
 
       <div className="pt-24 px-[5%] pb-20 max-w-5xl mx-auto">
 
