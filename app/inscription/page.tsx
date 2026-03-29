@@ -57,7 +57,7 @@ export default function Inscription() {
         </a>
         <div className="flex items-center gap-3">
           <span className="text-sm text-[#8A7A65]">Déjà un compte ?</span>
-          <a href="/connexion" className="px-5 py-2 rounded-lg bg-[#C17B2E] text-white text-sm font-semibold">
+          <a href="/login" className="px-5 py-2 rounded-lg bg-[#C17B2E] text-white text-sm font-semibold">
              Connexion
           </a>
         </div>
