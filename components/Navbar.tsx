@@ -34,7 +34,10 @@ export default function Navbar() {
         <a href="/search" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Acheter</a>
         <a href="/publier" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Vendre</a>
         {user && (
-          <a href="/dashboard" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Mon compte</a>
+          <>
+            <a href="/dashboard" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Mon compte</a>
+            <a href="/messages" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Messages</a>
+          </>
         )}
       </div>
 
@@ -71,3 +74,4 @@ export default function Navbar() {
     </nav>
   )
 }
+ 
