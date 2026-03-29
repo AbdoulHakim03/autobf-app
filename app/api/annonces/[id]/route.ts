@@ -41,3 +41,25 @@ export async function GET(
     )
   }
 }
+
+export async function DELETE(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await context.params
+
+    await prisma.annonce.delete({
+      where: { id }
+    })
+
+    return NextResponse.json({ message: 'Annonce supprimée' })
+
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json(
+      { error: 'Erreur serveur' },
+      { status: 500 }
+    )
+  }
+}
