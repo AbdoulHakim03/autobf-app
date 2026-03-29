@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 type Message = {
   id: string
@@ -23,7 +24,10 @@ type Conversation = {
   date: string
 }
 
-export default function Messages() {
+function MessagesContent() {
+  const searchParams = useSearchParams()
+  const avecUserId = searchParams.get('avecUserId')
+
   const [conversations, setConversations] = useState<Conversation[]>([])
   const [messages, setMessages] = useState<Message[]>([])
   const [selectedUser, setSelectedUser] = useState<Conversation | null>(null)
@@ -38,6 +42,32 @@ export default function Messages() {
       .then(data => setMoi(data.user))
     fetchConversations()
   }, [])
+
+  useEffect(() => {
+    if (avecUserId && conversations.length >= 0) {
+      const conv = conversations.find(c => c.userId === avecUserId)
+      if (conv) {
+        setSelectedUser(conv)
+        fetchMessages(avecUserId)
+      } else if (avecUserId) {
+        // Nouvelle conversation — charger les infos du vendeur
+        fetch(`/api/user/${avecUserId}`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.user) {
+              setSelectedUser({
+                userId: data.user.id,
+                nom: data.user.nom,
+                prenom: data.user.prenom,
+                dernierMessage: '',
+                date: '',
+              })
+              fetchMessages(avecUserId)
+            }
+          })
+      }
+    }
+  }, [avecUserId, conversations])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -76,6 +106,7 @@ export default function Messages() {
       })
       setContenu('')
       fetchMessages(selectedUser.userId)
+      fetchConversations()
     } catch (error) {
       console.error(error)
     } finally {
@@ -87,7 +118,6 @@ export default function Messages() {
     <main className="min-h-screen bg-[#F5F0E8] pt-[66px]">
       <div className="max-w-5xl mx-auto h-[calc(100vh-66px)] flex border-x border-black/10">
 
-        {/* LISTE CONVERSATIONS */}
         <div className="w-80 bg-white border-r border-black/10 flex flex-col shrink-0">
           <div className="p-5 border-b border-black/10">
             <h2 className="font-bold text-lg text-[#1A1208]">Messages</h2>
@@ -123,11 +153,9 @@ export default function Messages() {
           )}
         </div>
 
-        {/* ZONE MESSAGES */}
         <div className="flex-1 flex flex-col bg-[#F5F0E8]">
           {selectedUser ? (
             <>
-              {/* HEADER */}
               <div className="bg-white border-b border-black/10 px-5 py-4 flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-[#C17B2E] text-white flex items-center justify-center font-bold text-sm">
                   {selectedUser.nom[0]}
@@ -138,8 +166,12 @@ export default function Messages() {
                 </div>
               </div>
 
-              {/* MESSAGES */}
               <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-3">
+                {messages.length === 0 && (
+                  <div className="text-center py-10">
+                    <p className="text-sm text-[#8A7A65]">Commencez la conversation !</p>
+                  </div>
+                )}
                 {messages.map((msg) => {
                   const estMoi = moi && msg.envoyeurId === moi.id
                   return (
@@ -157,7 +189,6 @@ export default function Messages() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* INPUT */}
               <form onSubmit={handleSend} className="bg-white border-t border-black/10 p-4 flex gap-3">
                 <input
                   value={contenu}
@@ -186,5 +217,17 @@ export default function Messages() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function Messages() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#F5F0E8] flex items-center justify-center">
+        <p className="text-[#8A7A65]">Chargement...</p>
+      </div>
+    }>
+      <MessagesContent />
+    </Suspense>
   )
 }
