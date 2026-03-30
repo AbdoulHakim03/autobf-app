@@ -41,7 +41,7 @@ export default function Home() {
           </h1>
           <p className="text-lg text-[#8A7A65] max-w-lg mb-10 leading-relaxed">
             Vendeurs vérifiés par IA, paiement sécurisé par escrow,
-            historique VIN depuis l'Europe. Le marché auto burkinabè
+            historique VIN depuis l'Europe, l'Amerique et le Moyen Orient. Le marché auto burkinabè
             tel qu'il devrait être.
           </p>
           <div className="flex gap-3 flex-wrap">
