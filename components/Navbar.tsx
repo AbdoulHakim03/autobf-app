@@ -35,6 +35,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-6">
           <a href="/search" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Acheter</a>
           <a href="/publier" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Vendre</a>
+          <a href="/vin" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Vérifier VIN</a>
           {user && (
             <>
               <a href="/dashboard" className="text-sm font-medium text-[#8A7A65] hover:text-[#1A1208] transition-colors">Mon compte</a>
@@ -75,24 +76,23 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* BOUTON HAMBURGER */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden flex flex-col gap-1.5 p-2"
           >
-            <span className={`block w-6 h-0.5 bg-[#1A1208] transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-[#1A1208] transition-all ${menuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-[#1A1208] transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            <span className={'block w-6 h-0.5 bg-[#1A1208] transition-all ' + (menuOpen ? 'rotate-45 translate-y-2' : '')}></span>
+            <span className={'block w-6 h-0.5 bg-[#1A1208] transition-all ' + (menuOpen ? 'opacity-0' : '')}></span>
+            <span className={'block w-6 h-0.5 bg-[#1A1208] transition-all ' + (menuOpen ? '-rotate-45 -translate-y-2' : '')}></span>
           </button>
         </div>
       </nav>
 
-      {/* MENU MOBILE */}
       {menuOpen && (
         <div className="fixed top-[66px] left-0 right-0 z-40 bg-[#F5F0E8] border-b border-black/10 shadow-lg md:hidden">
           <div className="flex flex-col px-[5%] py-4 gap-3">
             <a href="/search" onClick={() => setMenuOpen(false)} className="py-3 text-sm font-medium text-[#3D3020] border-b border-black/5">🔍 Acheter une voiture</a>
             <a href="/publier" onClick={() => setMenuOpen(false)} className="py-3 text-sm font-medium text-[#3D3020] border-b border-black/5">📝 Publier une annonce</a>
+            <a href="/vin" onClick={() => setMenuOpen(false)} className="py-3 text-sm font-medium text-[#3D3020] border-b border-black/5">📋 Vérifier un VIN</a>
             {user ? (
               <>
                 <a href="/dashboard" onClick={() => setMenuOpen(false)} className="py-3 text-sm font-medium text-[#3D3020] border-b border-black/5">👤 Mon compte</a>
