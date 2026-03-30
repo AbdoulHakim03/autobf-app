@@ -1,4 +1,32 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
+type Annonce = {
+  id: string
+  marque: string
+  modele: string
+  annee: number
+  prix: number
+  carburant: string
+  ville: string
+  kilometrage: number
+  photos: string
+  vendeur: {
+    nom: string
+    prenom: string
+  }
+}
+
 export default function Home() {
+  const [annonces, setAnnonces] = useState<Annonce[]>([])
+
+  useEffect(() => {
+    fetch('/api/annonces?limit=4')
+      .then(res => res.json())
+      .then(data => setAnnonces(data.annonces || []))
+  }, [])
+
   return (
     <main className="min-h-screen bg-[#F5F0E8]">
 
@@ -45,7 +73,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CARDS */}
+      {/* VRAIES ANNONCES */}
       <section className="py-20 px-[5%]">
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-3xl font-bold text-[#1A1208]">
@@ -55,35 +83,50 @@ export default function Home() {
             Voir tout →
           </a>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {[
-            { name: "Toyota RAV4 2017", price: "6 500 000", km: "87 000 km", fuel: "Essence", city: "Ouagadougou", seller: "MN", note: "4.9" },
-            { name: "Kia Sportage 2019", price: "8 200 000", km: "61 000 km", fuel: "Diesel", city: "Ouagadougou", seller: "KF", note: "4.7" },
-            { name: "Toyota Yaris 2015", price: "3 200 000", km: "112 000 km", fuel: "Essence", city: "Bobo-Dioulasso", seller: "AB", note: "5.0" },
-            { name: "Toyota Highlander 2018", price: "14 500 000", km: "65 000 km", fuel: "Essence", city: "Ouagadougou", seller: "LA", note: "4.8" },
-          ].map((car) => (
-            <a href="/search" key={car.name} className="bg-white rounded-2xl border border-black/10 overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all cursor-pointer block">
-              <div className="h-44 bg-[#EDE8DF] flex items-center justify-center text-6xl">
-                🚗
-              </div>
-              <div className="p-4">
-                <div className="font-bold text-[#1A1208] text-lg mb-2">{car.name}</div>
-                <div className="flex gap-3 text-xs text-[#8A7A65] mb-3">
-                  <span>⛽ {car.fuel}</span>
-                  <span>📍 {car.city}</span>
-                  <span>🛣 {car.km}</span>
-                </div>
-                <div className="font-bold text-[#1A1208] text-xl">
-                  {car.price} <span className="text-xs font-normal text-[#8A7A65]">FCFA</span>
-                </div>
-                <div className="flex items-center gap-2 mt-3 pt-3 border-t border-black/5 text-xs text-[#8A7A65]">
-                  <div className="w-6 h-6 rounded-full bg-[#C17B2E] text-white flex items-center justify-center font-bold text-[10px]">{car.seller}</div>
-                  <span>★ {car.note}</span>
-                </div>
-              </div>
+
+        {annonces.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="text-5xl mb-4">🚗</div>
+            <p className="text-[#8A7A65] mb-4">Aucune annonce pour l'instant</p>
+            <a href="/publier" className="px-6 py-3 rounded-xl bg-[#C17B2E] text-white font-semibold hover:bg-[#A86520] transition-all">
+              Publier la première annonce →
             </a>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {annonces.map((annonce) => {
+              const photos = annonce.photos ? JSON.parse(annonce.photos) : []
+              return (
+                <a href={`/detail/${annonce.id}`} key={annonce.id} className="bg-white rounded-2xl border border-black/10 overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-[#C17B2E] transition-all cursor-pointer block">
+                  <div className="h-44 bg-[#EDE8DF] relative overflow-hidden">
+                    {photos.length > 0 ? (
+                      <img src={photos[0]} alt={annonce.marque + ' ' + annonce.modele} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-6xl">🚗</div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <div className="font-bold text-[#1A1208] text-lg mb-2">{annonce.marque} {annonce.modele} {annonce.annee}</div>
+                    <div className="flex gap-3 text-xs text-[#8A7A65] mb-3">
+                      <span>⛽ {annonce.carburant}</span>
+                      <span>📍 {annonce.ville}</span>
+                      <span>🛣 {annonce.kilometrage.toLocaleString()} km</span>
+                    </div>
+                    <div className="font-bold text-[#1A1208] text-xl">
+                      {annonce.prix.toLocaleString()} <span className="text-xs font-normal text-[#8A7A65]">FCFA</span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-3 pt-3 border-t border-black/5 text-xs text-[#8A7A65]">
+                      <div className="w-6 h-6 rounded-full bg-[#C17B2E] text-white flex items-center justify-center font-bold text-[10px]">
+                        {annonce.vendeur.nom[0]}
+                      </div>
+                      <span>{annonce.vendeur.nom} {annonce.vendeur.prenom}</span>
+                    </div>
+                  </div>
+                </a>
+              )
+            })}
+          </div>
+        )}
       </section>
 
       {/* COMMENT CA MARCHE */}
@@ -113,15 +156,18 @@ export default function Home() {
           <div className="font-bold text-2xl text-white">
             Auto<span className="text-[#C17B2E]">BF</span>
           </div>
-          <div className="flex gap-6">
+          <div className="flex gap-6 flex-wrap justify-center">
             <a href="/search" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Acheter</a>
             <a href="/publier" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Vendre</a>
             <a href="/dashboard" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Mon compte</a>
+            <a href="/conditions" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Conditions</a>
+            <a href="/confidentialite" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Confidentialité</a>
           </div>
-          <p className="text-[#8A7A65] text-sm">© 2026 AutoBF — OUEDRAOGO Abdoul Hakim</p>
+          <p className="text-[#8A7A65] text-sm">© 2026 AutoBF — OUEDRAOGO Abdoul Hakim. Tous droits réservés.</p>
         </div>
       </footer>
 
     </main>
   )
-} 
+}
+ 
