@@ -30,7 +30,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#F5F0E8]">
 
-      {/* HERO */}
       <section className="pt-40 pb-20 px-[5%]">
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C17B2E]/10 border border-[#C17B2E]/20 text-[#C17B2E] text-xs font-bold uppercase tracking-wider mb-6">
@@ -56,7 +55,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS */}
       <section className="bg-[#1A1208] py-12 px-[5%]">
         <div className="flex justify-center gap-20 flex-wrap">
           {[
@@ -73,7 +71,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* VRAIES ANNONCES */}
       <section className="py-20 px-[5%]">
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-3xl font-bold text-[#1A1208]">
@@ -97,7 +94,7 @@ export default function Home() {
             {annonces.map((annonce) => {
               const photos = annonce.photos ? JSON.parse(annonce.photos) : []
               return (
-                <a href={`/detail/${annonce.id}`} key={annonce.id} className="bg-white rounded-2xl border border-black/10 overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-[#C17B2E] transition-all cursor-pointer block">
+                <a href={'/detail/' + annonce.id} key={annonce.id} className="bg-white rounded-2xl border border-black/10 overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-[#C17B2E] transition-all cursor-pointer block">
                   <div className="h-44 bg-[#EDE8DF] relative overflow-hidden">
                     {photos.length > 0 ? (
                       <img src={photos[0]} alt={annonce.marque + ' ' + annonce.modele} className="w-full h-full object-cover" />
@@ -129,7 +126,6 @@ export default function Home() {
         )}
       </section>
 
-      {/* COMMENT CA MARCHE */}
       <section className="py-20 px-[5%] bg-[#EDE8DF]">
         <h2 className="text-3xl font-bold text-[#1A1208] mb-12 text-center">
           Comment ça <span className="text-[#C17B2E] italic">marche</span> ?
@@ -150,7 +146,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="bg-[#1A1208] py-10 px-[5%]">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="font-bold text-2xl text-white">
@@ -163,11 +158,13 @@ export default function Home() {
             <a href="/conditions" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Conditions</a>
             <a href="/confidentialite" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Confidentialité</a>
           </div>
-          <p className="text-[#8A7A65] text-sm">© 2026 AutoBF — OUEDRAOGO Abdoul Hakim. Tous droits réservés.</p>
+          <div className="text-center">
+            <p className="text-[#8A7A65] text-sm">© 2026 AutoBF — OUEDRAOGO Abdoul Hakim. Tous droits réservés.</p>
+            <p className="text-[#8A7A65] text-xs mt-1">📧 contact@autobf.africa &nbsp;·&nbsp; 📞 +226 55 31 59 69</p>
+          </div>
         </div>
       </footer>
 
     </main>
   )
 }
- 

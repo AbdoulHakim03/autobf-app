@@ -39,7 +39,7 @@ export default function Detail() {
 
   const fetchAnnonce = async () => {
     try {
-      const res = await fetch(`/api/annonces/${id}`)
+      const res = await fetch('/api/annonces/' + id)
       const data = await res.json()
       setAnnonce(data.annonce)
     } catch (error) {
@@ -62,11 +62,11 @@ export default function Detail() {
   )
 
   const photos = annonce.photos ? JSON.parse(annonce.photos) : []
-  const lienPaiement = `/paiement?annonceId=${annonce.id}&montant=${annonce.prix}&marque=${annonce.marque}&modele=${annonce.modele}`
+  const lienPaiement = '/paiement?annonceId=' + annonce.id + '&montant=' + annonce.prix + '&marque=' + annonce.marque + '&modele=' + annonce.modele
+  const lienVisite = '/messages?avecUserId=' + annonce.vendeur.id + '&visite=true&voiture=' + annonce.marque + ' ' + annonce.modele + ' ' + annonce.annee
 
   return (
     <main className="min-h-screen bg-[#F5F0E8]">
-
       <div className="pt-24 px-[5%] pb-20 grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
 
         <div className="lg:col-span-2">
@@ -85,7 +85,7 @@ export default function Detail() {
                       <img
                         key={i}
                         src={url}
-                        alt={'photo ' + (i+1)}
+                        alt={'photo ' + (i + 1)}
                         onClick={() => setPhotoActive(i)}
                         className={'w-full h-16 object-cover rounded-xl cursor-pointer border-2 transition-all ' + (photoActive === i ? 'border-[#C17B2E]' : 'border-transparent hover:border-[#C17B2E]/50')}
                       />
@@ -149,16 +149,21 @@ export default function Detail() {
               <div className="text-4xl font-bold text-[#1A1208] mb-4" style={{letterSpacing: '-1.5px'}}>
                 {annonce.prix.toLocaleString()} <span className="text-base font-normal text-[#8A7A65]">FCFA</span>
               </div>
+
+              <div className="p-3 rounded-xl bg-orange-50 border border-orange-200 text-xs text-orange-600 text-center mb-3">
+                ⚠️ AutoBF décline toute responsabilité pour les transactions effectuées en dehors de la plateforme. Utilisez uniquement notre système Escrow.
+              </div>
+
               <div className="flex flex-col gap-3">
                 <a href={lienPaiement} className="block w-full py-4 rounded-xl bg-[#C17B2E] text-white font-bold text-center hover:bg-[#A86520] transition-all shadow-lg">
                   🔒 Acheter via Escrow
                 </a>
-                <a href={`/messages?avecUserId=${annonce.vendeur.id}`} className="block w-full py-3 rounded-xl border border-black/10 text-[#3D3020] font-semibold text-sm hover:border-[#C17B2E] hover:text-[#C17B2E] transition-all text-center">
+                <a href={'/messages?avecUserId=' + annonce.vendeur.id} className="block w-full py-3 rounded-xl border border-black/10 text-[#3D3020] font-semibold text-sm hover:border-[#C17B2E] hover:text-[#C17B2E] transition-all text-center">
                   💬 Contacter le vendeur
                 </a>
-                <button className="w-full py-3 rounded-xl bg-[#2A7A4B]/10 text-[#2A7A4B] font-semibold text-sm border border-[#2A7A4B]/25 hover:bg-[#2A7A4B]/20 transition-all">
+                <a href={lienVisite} className="block w-full py-3 rounded-xl bg-[#2A7A4B]/10 text-[#2A7A4B] font-semibold text-sm border border-[#2A7A4B]/25 hover:bg-[#2A7A4B]/20 transition-all text-center">
                   📅 Planifier une visite
-                </button>
+                </a>
               </div>
             </div>
 
