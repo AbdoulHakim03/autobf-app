@@ -18,7 +18,7 @@ export default function Conditions() {
               AutoBF (Auto Best Found) est le premier marketplace automobile sécurisé du Burkina Faso. 
               Notre plateforme met en relation acheteurs et vendeurs de véhicules d'occasion en offrant 
               un système de paiement sécurisé par escrow, des vendeurs vérifiés par intelligence artificielle, 
-              et un historique VIN certifié. AutoBF est opéré par OUEDRAOGO Abdoul Hakim, basé au Burkina Faso.
+              et un historique VIN certifié. AutoBF est basé au Burkina Faso.
             </p>
           </section>
 
@@ -26,7 +26,7 @@ export default function Conditions() {
             <h2 className="text-xl font-bold text-[#1A1208] mb-4">2. Acceptation des conditions</h2>
             <p className="text-[#8A7A65] leading-relaxed">
               En utilisant AutoBF, vous acceptez pleinement et sans réserve les présentes conditions 
-              d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre plateforme. 
+              d'utilisation. 
               AutoBF se réserve le droit de modifier ces conditions à tout moment. Les modifications 
               prennent effet dès leur publication sur le site.
             </p>

@@ -159,7 +159,7 @@ export default function Home() {
             <a href="/confidentialite" className="text-sm text-[#8A7A65] hover:text-white transition-colors">Confidentialité</a>
           </div>
           <div className="text-center">
-            <p className="text-[#8A7A65] text-sm">© 2026 AutoBF — OUEDRAOGO Abdoul Hakim. Tous droits réservés.</p>
+            <p className="text-[#8A7A65] text-sm">© 2026 AutoBF — Tous droits réservés.</p>
             <p className="text-[#8A7A65] text-xs mt-1">📧 contact@autobf.africa &nbsp;·&nbsp; 📞 +226 55 31 59 69</p>
           </div>
         </div>
